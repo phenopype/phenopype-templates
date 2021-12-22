@@ -1,3 +1,4 @@
+processing_steps:
 - preprocessing:
     - create_mask
     - create_reference:

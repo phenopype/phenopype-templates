@@ -1,0 +1,17 @@
+## simple landmarking config - set, visualize, and save landmarks
+template: locked # prevents accidental overwrite - will be removed after using "load_template" or "Project.add_config"
+processing_steps:
+- measurement:
+    - set_landmark:
+        point_size: 25
+        point_colour: green
+        label_size: 3
+        label_width: 5
+- visualization:
+    - draw_landmark:
+        point_size: 25
+        point_colour: green
+        label_size: 3
+        label_width: 5
+- export:
+    - save_annotation
