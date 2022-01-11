@@ -1,0 +1,45 @@
+# Basic object detection 
+# ----------------------
+# Uses thresholding for segmentation. Contains optional morphology 
+# operations to remove fine structures (see 
+# https://docs.opencv.org/master/db/df6/tutorial_erosion_dilatation.html 
+# for details), as well as an optional contour-editing step (clean up 
+# detected contours and detect again), and default visualization and 
+# export steps. Measure shape and texture features (optional).
+
+template: locked # prevents accidental overwrite - removed after loading
+
+processing_steps:
+    - preprocessing:
+        - blur:
+            kernel_size: 5
+    - segmentation:
+        - threshold:
+            method: binary
+            value: 127
+        # - morphology:
+            # operation: open
+            # shape: cross
+            # kernel_size: 5
+            # iterations: 3
+        # - morphology:
+            # operation: close
+            # shape: ellipse
+            # kernel_size: 5
+            # iterations: 3
+        - detect_contour:
+            min_diameter: 0
+            min_area: 0
+        # - edit_contour
+        # - detect_contour:
+            # min_diameter: 0
+            # min_area: 0
+    # - measurement:
+        # - compute_shape_features
+        # - compute_texture_features
+    - visualization:
+        - draw_contour
+    - export:
+        - save_canvas
+        - save_annotation:
+            overwrite: true
