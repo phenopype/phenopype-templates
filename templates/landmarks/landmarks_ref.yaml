@@ -8,7 +8,7 @@
 # on the project level, "detect_reference" will attempt to find it in 
 # the current image and measure the current px-ratio.
 
-template: locked # prevents accidental overwrite - removed after loading
+template_locked: true  # prevents accidental overwrite - removed after loading
 
 processing_steps:
     - preprocessing:
@@ -24,6 +24,7 @@ processing_steps:
             point_size: 8
             point_colour: aqua
             label: true
+            label_colour: aqua
             label_size: 3
             label_width: 3
         - draw_reference:

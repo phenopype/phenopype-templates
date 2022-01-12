@@ -12,7 +12,7 @@
 # detected contours and detect again), and default visualization and 
 # export steps. Measure shape and texture features (optional).
 
-template: locked # prevents accidental overwrite - removed after loading
+template_locked: true  # prevents accidental overwrite - removed after loading
 
 processing_steps:
     - preprocessing:

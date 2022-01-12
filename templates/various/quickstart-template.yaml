@@ -1,0 +1,36 @@
+# phenopype quickstart template
+# ------------------------------
+# This template is intended to go with the phenopype quickstart materials 
+# - for details see https://www.phenopype.org/docs/quickstart/ and refer to
+# Figure 2 in Lürig 2021 (https://doi.org/10.1111/2041-210X.13771) or 
+# phenopype tutorial 3 (https://www.phenopype.org/docs/tutorials/tutorial_3)
+
+template_locked: true  # prevents accidental overwrite - removed after loading
+
+processing_steps:
+    - preprocessing:
+        - create_mask:
+            tool: polygon
+            label: plate-area
+        - blur:
+            kernel_size: 9
+    - segmentation:
+        - threshold:
+            method: adaptive
+            blocksize: 99
+            constant: 5
+            channel: red
+        - detect_contour:
+            retrieval: ext
+            min_area: 150
+    - measurement:
+        - compute_shape_features:
+    - visualization:
+        - select_canvas:
+            canvas: raw
+        - draw_contour
+        - draw_mask
+    - export:
+        - save_canvas
+        - save_annotation:
+            overwrite: true
