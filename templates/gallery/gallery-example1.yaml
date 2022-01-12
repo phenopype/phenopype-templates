@@ -8,14 +8,13 @@ template_locked: true  # prevents accidental overwrite - removed after loading
 processing_steps:
     - preprocessing:
         - create_mask
-        - create_reference:
-            mask: true
+        - detect_reference
         - blur:
             kernel_size: 15
     - segmentation:
         - threshold:
             method: adaptive
-            blocksize: 49
+            blocksize: 149
             constant: 5
             channel: green
         - morphology:
@@ -24,9 +23,12 @@ processing_steps:
             kernel_size: 9
             iterations: 2
         - detect_contour:
-            retrieval: ext
             min_diameter: 0
             min_area: 250
+        - edit_contour
+        - detect_contour
+            min_diameter: 150
+            max_diameter: 300
     - measurement:
         - compute_shape_features
         - compute_texture_features
@@ -41,4 +43,4 @@ processing_steps:
     - export:
         - save_canvas
         - save_annotation:
-            overwrite: True
+            overwrite: true
