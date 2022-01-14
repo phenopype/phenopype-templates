@@ -21,4 +21,5 @@ processing_steps:
         - draw_reference:
             line_colour: crimson
     - export:
-        - save_annotation
+        - save_annotation:
+            overwrite: true
