@@ -5,7 +5,7 @@
 template_locked: true  # prevents accidental overwrite - removed after loading
 
 processing_steps:
-    - preprocessing: 
+    - preprocessing:
         - detect_reference
         - write_comment
     - measurement:
@@ -19,6 +19,6 @@ processing_steps:
             label_size: 2
             label_width: 2
         - draw_reference:
-            line_colour: aqua
+            line_colour: crimson
     - export:
         - save_annotation

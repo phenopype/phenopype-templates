@@ -23,10 +23,10 @@ processing_steps:
             kernel_size: 9
             iterations: 2
         - detect_contour:
-            min_diameter: 0
-            min_area: 250
+            min_diameter: 150
+            max_diameter: 300
         - edit_contour
-        - detect_contour
+        - detect_contour:
             min_diameter: 150
             max_diameter: 300
     - measurement:
@@ -35,11 +35,11 @@ processing_steps:
     - visualization:
         - select_canvas:
             canvas: image
-        - draw_contour:
-            line_width: 2
-            label_width: 1
-            label_size: 1
-            fill: 0.3
+        - draw_contour
+        - draw_mask:
+            line_colour: aqua
+        - draw_reference:
+            line_colour: crimson
     - export:
         - save_canvas
         - save_annotation:
