@@ -1,0 +1,36 @@
+# phenopype gallery example 6
+# ---------------------------
+# count small freshwater snails and separate overlapping specimens
+
+template_locked: true  # prevents accidental overwrite - removed after loading
+
+processing_steps:
+    - preprocessing:
+        - create_mask:
+            tool: rectangle
+        - create_reference
+    - segmentation:
+        - threshold:
+            method: adaptive
+            blocksize: 99
+            constant: 3
+        - detect_contour
+        - watershed:
+            distance_cutoff: 0.7
+        - detect_contour:
+            min_area: 100
+        - edit_contour
+        - detect_contour:
+            min_area: 100
+    - measurement:
+    - visualization:
+        - select_canvas:
+            canvas: raw
+        - draw_contour:
+            line_width: 1
+        - draw_mask:
+            line_width: 2
+            line_colour: aqua
+    - export:
+        - save_annotation:
+            overwrite: true
