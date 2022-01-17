@@ -1,0 +1,31 @@
+# phenopype gallery project 8-2
+# ---------------------------
+# measure multiple fish teeth on a dark background
+
+template_locked: true  # prevents accidental overwrite - removed after loading
+
+processing_steps:
+    - preprocessing:
+        - create_mask:
+          include: false
+        - create_reference
+    - segmentation:
+        - blur:
+            kernel_size: 11
+        - threshold:
+            method: binary
+            value: 180
+            invert: true
+        - morphology:
+            operation: close
+            shape: ellipse
+            kernel_size: 3
+            iterations: 3
+        - detect_contour:
+            min_area: 500
+    - measurement:
+        - compute_shape_features
+    - visualization:
+        - select_canvas:
+            canvas: raw
+        - draw_contour

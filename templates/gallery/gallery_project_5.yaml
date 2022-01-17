@@ -1,31 +1,42 @@
-# phenopype gallery example 6
+# phenopype gallery project 5
 # ---------------------------
-# count small freshwater snails and separate overlapping specimens
+# separate stickleback armour plates
 
 template_locked: true  # prevents accidental overwrite - removed after loading
 
 processing_steps:
     - preprocessing:
         - create_mask:
-            tool: rectangle
-        - create_reference
+            tool: polygon
     - segmentation:
         - threshold:
             method: adaptive
-            blocksize: 99
-            constant: 3
+            blocksize: 199
+            constant: 7
+            channel: red
+        - morphology:
+            operation: close
+            shape: ellipse
+            kernel_size: 3
+            iterations: 3
         - detect_contour
         - watershed:
-            distance_cutoff: 0.7
+            distance_cutoff: 0.9
         - detect_contour:
             min_area: 100
-        - edit_contour
+    - visualization:
+        - select_canvas:
+            canvas: red
+    - segmentation:
+        - edit_contour:
+            overlay_blend: 0
+            overlay_line_width: 1
         - detect_contour:
             min_area: 100
     - measurement:
     - visualization:
         - select_canvas:
-            canvas: raw
+            canvas: red
         - draw_contour:
             line_width: 1
         - draw_mask:

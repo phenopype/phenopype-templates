@@ -1,0 +1,30 @@
+# phenopype gallery project 6
+# ---------------------------
+# measure a single fish tooth on a light background
+
+template_locked: true  # prevents accidental overwrite - removed after loading
+
+processing_steps:
+    - preprocessing:
+        - create_mask
+        - create_reference
+    - segmentation:
+        - blur:
+            kernel_size: 25
+        - threshold:
+            method: binary
+            value: 170
+            channel: green
+        - morphology:
+            operation: close
+            shape: ellipse
+            kernel_size: 3
+            iterations: 3
+        - detect_contours:
+            min_area: 500
+    - measurement:
+        - compute_shape_features
+    - visualization:
+        - select_canvas:
+            canvas: green
+        - draw_contours
