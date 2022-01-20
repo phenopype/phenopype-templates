@@ -1,5 +1,5 @@
-# phenopype gallery project 8-2
-# ---------------------------
+# phenopype gallery project 8b
+# ----------------------------
 # measure multiple fish teeth on a dark background
 
 template_locked: true  # prevents accidental overwrite - removed after loading
@@ -7,7 +7,7 @@ template_locked: true  # prevents accidental overwrite - removed after loading
 processing_steps:
     - preprocessing:
         - create_mask:
-          include: false
+            include: false
         - create_reference
     - segmentation:
         - blur:

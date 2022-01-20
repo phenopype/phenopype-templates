@@ -27,4 +27,5 @@ processing_steps:
     - visualization:
         - select_canvas:
             canvas: green
-        - draw_contours
+        - draw_contour
+

@@ -1,0 +1,52 @@
+# phenopype gallery project 9
+# ----------------------------
+# segment damselflies and quantify shape and texture of their body parts
+
+template_locked: true  # prevents accidental overwrite - removed after loading
+
+
+processing_steps:
+    - preprocessing:
+        - comment:
+            label: ID
+        - blur:
+            kernel_size: 5
+    - segmentation:
+        - threshold:
+            method: binary
+            value: 90
+            channel: blue
+        - morphology:
+            operation: open
+            shape: cross
+            kernel_size: 7
+            iterations: 2
+        - morphology:
+            operation: close
+            shape: ellipse
+            kernel_size: 5
+            iterations: 3
+        - detect_contour:
+            min_diameter: 0
+            min_area: 10000
+        - edit_contour:
+            overlay_blend: 0
+            overlay_line_width: 1
+        - detect_contour:
+            min_diameter: 0
+            min_area: 10000
+        - edit_contour:
+            overlay_blend: 0
+            overlay_line_width: 1
+        - detect_contour
+    - visualization:
+        - draw_contour:
+            contour_id: b
+        - draw_contour:
+            contour_id: c
+            line_colour: aqua
+    - export:
+        - save_canvas:
+            resize: 1
+        - save_annotation:
+            overwrite: true

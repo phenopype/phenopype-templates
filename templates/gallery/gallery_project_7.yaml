@@ -6,18 +6,23 @@ template_locked: true  # prevents accidental overwrite - removed after loading
 
 processing_steps:
     - preprocessing:
-        - detect_shape:
+        - detect_mask:
             shape: circle
-            circle_args: {max_radius:250, min_radius: 150, param2: 150, param1:100, min_dist:200}
+            circle_args: {max_radius: 300, min_radius: 210, param2: 100, param1: 100, min_dist: 400}
+            resize: 0.5
+        - blur:
+            kernel_size: 5
     - segmentation:
         - threshold:
             method: adaptive
-            blocksize: 99
-            constant: 3
+            blocksize: 29
+            constant: 10
         - detect_contour
         - edit_contour
-        - detect_contour
+        - detect_contour:
+            min_diameter: 100
     - measurement:
+        - detect_skeleton
     - visualization:
         - select_canvas:
             canvas: raw
@@ -26,6 +31,10 @@ processing_steps:
         - draw_mask:
             line_width: 2
             line_colour: aqua
+        - draw_polyline:
+            line_colour: fuchsia
+            line_width: 2
     - export:
         - save_annotation:
             overwrite: true
+
