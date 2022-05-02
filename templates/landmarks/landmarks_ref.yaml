@@ -22,9 +22,7 @@ processing_steps:
     - visualization:
         - draw_landmark:
             point_size: 8
-            point_colour: aqua
             label: true
-            label_colour: aqua
             label_size: 3
             label_width: 3
         - draw_reference:
