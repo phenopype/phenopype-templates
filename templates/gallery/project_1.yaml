@@ -16,7 +16,7 @@ processing_steps:
             method: adaptive
             blocksize: 149
             constant: 5
-            channel: green
+            channel: blue
         - morphology:
             operation: open
             shape: cross

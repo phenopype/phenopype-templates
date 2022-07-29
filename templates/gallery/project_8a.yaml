@@ -14,7 +14,7 @@ processing_steps:
         - threshold:
             method: binary
             value: 170
-            channel: green
+            channel: blue
         - morphology:
             operation: close
             shape: ellipse
@@ -26,6 +26,6 @@ processing_steps:
         - compute_shape_features
     - visualization:
         - select_canvas:
-            canvas: green
+            canvas: blue
         - draw_contour
 

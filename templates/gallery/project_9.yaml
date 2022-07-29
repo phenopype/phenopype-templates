@@ -15,7 +15,7 @@ processing_steps:
         - threshold:
             method: binary
             value: 90
-            channel: blue
+            channel: red
         - morphology:
             operation: open
             shape: cross

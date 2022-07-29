@@ -13,7 +13,7 @@ processing_steps:
             method: adaptive
             blocksize: 199
             constant: 7
-            channel: red
+            channel: green
         - morphology:
             operation: close
             shape: ellipse
@@ -27,7 +27,7 @@ processing_steps:
         - detect_contour
     - visualization:
         - select_canvas:
-            canvas: red
+            canvas: green
     - segmentation:
         - edit_contour:
             overlay_blend: 0
@@ -37,7 +37,7 @@ processing_steps:
     - measurement:
     - visualization:
         - select_canvas:
-            canvas: red
+            canvas: green
         - draw_contour:
             line_width: 1
         - draw_mask:
