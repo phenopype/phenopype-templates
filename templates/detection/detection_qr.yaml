@@ -1,0 +1,32 @@
+# Object detection with masking and reference detection
+# -----------------------------------------------------
+# Uses thresholding for segmentation. If a template 
+# for a reference card has been created on the project level, 
+# "detect_reference" will attempt to find it in the current image, 
+# measure the current px-ratio, and exclude it detection. Also contains 
+# optional morphology operations to remove fine structures (see 
+# https://docs.opencv.org/master/db/df6/tutorial_erosion_dilatation.html 
+# for details), as well as an optional contour-editing step (clean up 
+# detected contours and detect again), and default visualization and 
+# export steps. Measure shape and texture features (optional).
+
+template_locked: true  # prevents accidental overwrite - removed after loading
+
+processing_steps:
+    - preprocessing:
+        - detect_QRcode:
+            ANNOTATION: {type: comment, id: a, edit: true}
+            enter_manually: true
+            # show_results: true
+            label_colour: red
+    - visualization:
+        - draw_QRcode:
+            line_colour: red
+            label: true
+            label_width: 3
+            label_size: 2
+            label_colour: red
+    - export:
+        - save_annotation:
+            overwrite: true
+        - export_csv
