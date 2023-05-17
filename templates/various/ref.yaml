@@ -1,0 +1,19 @@
+# Reference detection
+# -----------------------------------------------------
+# Requires a reference card to be created on the project level.
+# "detect_reference" will attempt to find it in the current image,
+# measure the current px-ratio, and exclude it detection.
+
+template_locked: true  # prevents accidental overwrite - removed after loading
+
+processing_steps:
+    - preprocessing:
+        - detect_reference
+    - visualization:
+        - draw_reference:
+            label: true
+    - export:
+        - save_canvas
+        - save_annotation:
+            overwrite: true
+        - export_csv
